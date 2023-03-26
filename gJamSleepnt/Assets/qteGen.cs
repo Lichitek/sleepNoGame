@@ -24,6 +24,7 @@ public class qteGen : MonoBehaviour
     string randKey;
     bool push;
     Health healthPlayer;
+    Animator animator;
 
     private void Start()
     {
@@ -36,6 +37,7 @@ public class qteGen : MonoBehaviour
     {
         if(start)
         {
+            animator = GameObject.Find("enemy").transform.GetChild(0).GetComponent<Animator>();
             healthPlayer = (Health)FindObjectOfType(typeof(Health));
             GameObject.Find("Player").GetComponent<Player>().enabled = false;
             //cameraQte = GameObject.Find("qteCamera").GetComponent<Camera>();
@@ -85,6 +87,8 @@ public class qteGen : MonoBehaviour
         {
             countDownImage.GetComponent<Image>().color = Color.red;
             healthPlayer.TakeDamage();
+            animator.SetBool("isAttacking", true);
+            yield return new WaitForSeconds(2.5f);
         }
         yield return new WaitForSeconds(0.5f);
         countQte++;
@@ -103,11 +107,20 @@ public class qteGen : MonoBehaviour
             }
             FindObjectOfType(typeof(Player)).GameObject().transform.GetChild(0).GetComponent<Animator>().enabled = true;
             GameObject.Find("Player").GetComponent<Player>().enabled = true;
+            animator.SetBool("isAttacking", true);
+            foreach (enemyMeneger enemy in FindObjectsOfType<enemyMeneger>())
+            {
+                enemy.transform.GetChild(0).GameObject().SetActive(false);
+            }
+            yield return new WaitForSeconds(3f);
+            foreach (enemyMeneger enemy in FindObjectsOfType<enemyMeneger>())
+            {
+                enemy.transform.GetChild(0).GameObject().SetActive(true);
+            }
         }
         else
         {
             start = true;
-            
         }        
     }
 }

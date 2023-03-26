@@ -27,7 +27,7 @@ public class enemyMeneger : MonoBehaviour
         {
             road.StopRoad();
         }
-       FindObjectOfType(typeof(Player)).GameObject().transform.GetChild(0).GetComponent<Animator>().enabled = false;
+        FindObjectOfType(typeof(Player)).GameObject().transform.GetChild(0).GetComponent<Animator>().enabled = false;
         
         qte.end = false;
 
