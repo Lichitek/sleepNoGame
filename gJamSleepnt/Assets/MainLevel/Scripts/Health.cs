@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -52,8 +51,15 @@ public class Health : MonoBehaviour
         {
             road.StopRoad();
         }
+        
         Player player = (Player)FindObjectOfType(typeof(Player));
-        player.StopMoving();
+        if (player != null)
+            player.StopMoving();
+        else
+        {
+            PlayerFalling playerFalling = (PlayerFalling)FindObjectOfType(typeof(PlayerFalling));
+            playerFalling.StopMoving();
+        }
         Time.timeScale = 0f;
     }
 }

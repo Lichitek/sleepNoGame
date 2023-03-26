@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Animator _animator;
     [SerializeField] private RoadSpawner _roadSpawner;
     [SerializeField] private List<GameObject> _movePoints;
     [SerializeField] private float _speed;
@@ -51,13 +52,9 @@ public class Player : MonoBehaviour
             {
                 _isSliding = false;
                 transform.Rotate(new Vector3(-90f, transform.rotation.y));
-                if (transform.position.y - _lastYPos <= 0.5f)
-                    transform.position = new Vector3(0f, _lastYPos, 0f);
-                else
-                {
+                if (transform.position.y - _lastYPos > 0.5f)
                     _lastYPos = 1f;
-                    transform.position = new Vector3(_movePoints[_whichPoint.IndexOf(true)].transform.position.x, _lastYPos, _movePoints[_whichPoint.IndexOf(true)].transform.position.z);
-                }
+                transform.position = new Vector3(_movePoints[_whichPoint.IndexOf(true)].transform.position.x, _lastYPos, _movePoints[_whichPoint.IndexOf(true)].transform.position.z);
                 _currentSlidingTime = 0f;
             }
         }
@@ -95,6 +92,8 @@ public class Player : MonoBehaviour
                 _isJumping = false;
                 _isGoingDown = true;
                 _lastYPos = 1f;
+                _animator.SetBool("isFallingDown", true);
+                _animator.SetBool("isJumping", false);
             }
         }
 
@@ -107,6 +106,7 @@ public class Player : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, _lastYPos, transform.position.z);
                 _isGoingDown = false;
                 _isGrounded = true;
+                _animator.SetBool("isFallingDown", false);
             }
         }
     }
@@ -134,6 +134,7 @@ public class Player : MonoBehaviour
             _isJumping = true;
             _isGrounded = false;
             _lastYPos = transform.position.y;
+            _animator.SetBool("isJumping", true);
         }
 
         if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && _isGrounded && (!_isMovingLeft && !_isMovingRight) && !_isSliding)
@@ -156,6 +157,7 @@ public class Player : MonoBehaviour
             _isGoingDown = false;
             if (!_isSliding)
                 _lastYPos = transform.position.y;
+            _animator.SetBool("isFallingDown", false);
         }
 
         if (other.tag == "Obstacle")
@@ -201,7 +203,12 @@ public class Player : MonoBehaviour
             {
                 _isGrounded = false;
                 if (!_isJumping)
+                {
                     _isGoingDown = true;
+                    _animator.SetBool("isFallingDown", true);
+                }
+                else
+                    _animator.SetBool("isJumping", true);
                 _lastYPos = 1f;
             }
         }
