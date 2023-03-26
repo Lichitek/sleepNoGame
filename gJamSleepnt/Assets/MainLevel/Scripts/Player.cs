@@ -56,6 +56,9 @@ public class Player : MonoBehaviour
                     _lastYPos = 1f;
                 transform.position = new Vector3(_movePoints[_whichPoint.IndexOf(true)].transform.position.x, _lastYPos, _movePoints[_whichPoint.IndexOf(true)].transform.position.z);
                 _currentSlidingTime = 0f;
+                _animator.SetBool("isSliding", false);
+                transform.GetChild(0).transform.localPosition = new Vector3(0f, -0.72f, 0f);
+                transform.GetChild(0).Rotate(new Vector3(90f, 0f));
             }
         }
 
@@ -143,7 +146,13 @@ public class Player : MonoBehaviour
             transform.Translate(new Vector3(0f, transform.position.y - GetComponent<CapsuleCollider>().height / 1.5f, 0f));
             if (_GroundSlidingY == 0f)
                 _GroundSlidingY = transform.position.y;
-            transform.Rotate(new Vector3(90f, transform.rotation.y)); 
+            transform.Rotate(new Vector3(90f, 0f));
+            _animator.SetBool("isSliding", true);
+            if (transform.position.y > 1f)
+                transform.GetChild(0).transform.localPosition = new Vector3(0f, 0f, 0.332f);
+            else
+                transform.GetChild(0).transform.localPosition = new Vector3(0f, 0f, 0.5f);
+            transform.GetChild(0).Rotate(new Vector3(-90f, 0f));
         }
 
     }

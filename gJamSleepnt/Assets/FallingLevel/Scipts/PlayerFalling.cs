@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerFalling : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private RoadSpawner _roadSpawner;
+    [SerializeField] private TubeSpawner _tubeSpawner;
     [SerializeField] private List<GameObject> _movePoints;
     [SerializeField] private float _speed;
 
@@ -74,7 +74,7 @@ public class PlayerFalling : MonoBehaviour
         }
 
         if (other.tag == "Untagged")
-            _roadSpawner.Spawn();
+            _tubeSpawner.Spawn();
     }
 
     public void StopMoving()
