@@ -40,6 +40,7 @@ public class Health : MonoBehaviour
         }
     }
 
+
     public void Death()
     {
         for (int i = 0; i < _hpImages.Count; i++)
