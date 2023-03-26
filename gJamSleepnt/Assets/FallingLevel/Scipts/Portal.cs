@@ -7,9 +7,9 @@ public class Portal : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-            SceneManager.LoadScene(1);
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+            SceneManager.LoadScene(2);
         else
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
     }
 }

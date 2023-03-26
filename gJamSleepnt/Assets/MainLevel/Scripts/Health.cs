@@ -60,6 +60,9 @@ public class Health : MonoBehaviour
             PlayerFalling playerFalling = (PlayerFalling)FindObjectOfType(typeof(PlayerFalling));
             playerFalling.StopMoving();
         }
-        Time.timeScale = 0f;
+        pauseMenu restartPanel = (pauseMenu)FindObjectOfType(typeof(pauseMenu));
+        restartPanel.restartPanelActive();
+
+        _Death();
     }
 }

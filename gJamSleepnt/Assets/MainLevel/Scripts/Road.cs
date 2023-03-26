@@ -4,6 +4,8 @@ using UnityEngine;
 public class Road : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    private float dataSpeed;
+
 
     private void Update()
     {
@@ -28,6 +30,11 @@ public class Road : MonoBehaviour
 
     public void StopRoad()
     {
+        dataSpeed = _speed;
         _speed = 0;
+    }
+    public void resumeRoad()
+    {
+        _speed = dataSpeed;
     }
 }
