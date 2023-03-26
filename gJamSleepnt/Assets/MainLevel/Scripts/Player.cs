@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
             transform.Rotate(new Vector3(90f, 0f));
             _animator.SetBool("isSliding", true);
             if (transform.position.y > 1f)
-                transform.GetChild(0).transform.localPosition = new Vector3(0f, 0f, 0.332f);
+                transform.GetChild(0).transform.localPosition = new Vector3(0f, 0f, 0f);
             else
                 transform.GetChild(0).transform.localPosition = new Vector3(0f, 0f, 0.5f);
             transform.GetChild(0).Rotate(new Vector3(-90f, 0f));
@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
                 _isMovingRight = false;
             }
         }
-        
+
         if (other.tag == "Untagged")
             _roadSpawner.Spawn();
     }

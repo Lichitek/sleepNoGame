@@ -37,6 +37,7 @@ public class qteGen : MonoBehaviour
         if(start)
         {
             healthPlayer = (Health)FindObjectOfType(typeof(Health));
+            GameObject.Find("Player").GetComponent<Player>().enabled = false;
             //cameraQte = GameObject.Find("qteCamera").GetComponent<Camera>();
             qtePanel.SetActive(true);
             StartCoroutine(qteAttack());
@@ -101,6 +102,7 @@ public class qteGen : MonoBehaviour
                 road.resumeRoad();
             }
             FindObjectOfType(typeof(Player)).GameObject().transform.GetChild(0).GetComponent<Animator>().enabled = true;
+            GameObject.Find("Player").GetComponent<Player>().enabled = true;
         }
         else
         {
