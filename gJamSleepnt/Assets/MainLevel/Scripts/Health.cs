@@ -40,6 +40,14 @@ public class Health : MonoBehaviour
         }
     }
 
+    public bool IsAlive()
+    {
+        if (_hpState[0] == false)
+            return false;
+        else
+            return true;
+    }
+
 
     public void Death()
     {

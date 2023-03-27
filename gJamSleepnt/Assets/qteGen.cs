@@ -24,7 +24,6 @@ public class qteGen : MonoBehaviour
     string randKey;
     bool push;
     Health healthPlayer;
-    Animator animator;
 
     private void Start()
     {
@@ -37,7 +36,7 @@ public class qteGen : MonoBehaviour
     {
         if(start)
         {
-            animator = GameObject.Find("enemy").transform.GetChild(0).GetComponent<Animator>();
+            //animator = GameObject.Find("enemy").transform.GetChild(0).GetComponent<Animator>();
             healthPlayer = (Health)FindObjectOfType(typeof(Health));
             GameObject.Find("Player").GetComponent<Player>().enabled = false;
             //cameraQte = GameObject.Find("qteCamera").GetComponent<Camera>();
@@ -68,7 +67,13 @@ public class qteGen : MonoBehaviour
     {
         start = false;
         cameraQte.gameObject.SetActive(true);
-   
+        List<Animator> animators = new List<Animator>();
+        foreach (enemyMeneger enemy in FindObjectsOfType<enemyMeneger>())
+        {
+            animators.Add(enemy.transform.GetChild(0).GameObject().GetComponent<Animator>());
+            //enemy.transform.GetChild(0).GameObject().SetActive(false);
+        }
+
         int randNum=Random.Range(0,charList.Count);
         randKey = charList[randNum].ToString();
         currentKey.text="["+randKey+"]";
@@ -87,9 +92,18 @@ public class qteGen : MonoBehaviour
         {
             countDownImage.GetComponent<Image>().color = Color.red;
             healthPlayer.TakeDamage();
-            animator.SetBool("isAttacking", true);
+            if (!healthPlayer.IsAlive())
+            {
+                qtePanel.SetActive(false);
+                cameraQte.gameObject.SetActive(false);
+                countDownImage.GetComponent<Image>().color = Color.blue;
+                yield break;
+            }
+            foreach (Animator animator in animators)
+                animator.SetBool("isAttacking", true);
             yield return new WaitForSeconds(2.5f);
         }
+        pressedKey = null;
         yield return new WaitForSeconds(0.5f);
         countQte++;
         Debug.Log(countQte);
@@ -107,7 +121,9 @@ public class qteGen : MonoBehaviour
             }
             FindObjectOfType(typeof(Player)).GameObject().transform.GetChild(0).GetComponent<Animator>().enabled = true;
             GameObject.Find("Player").GetComponent<Player>().enabled = true;
-            animator.SetBool("isAttacking", true);
+
+            foreach (Animator animator in animators)
+                animator.SetBool("isAttacking", false);
             foreach (enemyMeneger enemy in FindObjectsOfType<enemyMeneger>())
             {
                 enemy.transform.GetChild(0).GameObject().SetActive(false);

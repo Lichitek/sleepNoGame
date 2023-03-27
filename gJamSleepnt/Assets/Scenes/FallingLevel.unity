@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -408,7 +408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716532139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 155}
+  m_LocalPosition: {x: 0, y: 0, z: 151.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -632,13 +632,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e305efd198fe5c4fbe18805b85a3270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  _animator: {fileID: 1098813573}
   _tubeSpawner: {fileID: 716532142}
   _movePoints:
   - {fileID: 1964615490}
   - {fileID: 2019083364}
   - {fileID: 1273169993}
-  _speed: 5
+  _speed: 7
 --- !u!136 &1064159913
 CapsuleCollider:
   m_ObjectHideFlags: 0
